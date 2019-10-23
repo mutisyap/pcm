@@ -12,7 +12,7 @@ import java.util.UUID;
 /**
  * A cashier creates orders and then sends the orders to waiters.
  */
-public class Cashier implements Runnable {
+public class Cashier extends Thread {
     private final Logger logger = LoggerFactory.getLogger(Cashier.class);
     private final Restaurant restaurant;
     private List<String> availableDishes;

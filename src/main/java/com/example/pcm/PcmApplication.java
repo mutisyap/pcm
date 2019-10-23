@@ -12,11 +12,17 @@ public class PcmApplication {
         Restaurant restaurant = new Restaurant();
 
         // create new cashier
-        Thread cashierThread = new Thread(new Cashier(2000, restaurant), "cashier-1");
+        Thread cashierThread = new Thread(new Cashier(2000, restaurant), "cashier");
         cashierThread.start();
+
+		/*Thread cashier2 = new Thread(new Cashier(3000, restaurant), "cashier-2");
+		 cashier2.start();*/
         
-        Thread waiterThread = new Thread(new Waiter(restaurant), "waiter-1");
+        Thread waiterThread = new Thread(new Waiter(restaurant), "waiter");
         waiterThread.start();
+
+		Thread waitressThread = new Thread(new Waiter(restaurant), "waitress");
+		waitressThread.start();
     }
 
 }

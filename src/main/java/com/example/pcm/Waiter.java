@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import java.util.Random;
 
 /**
- * From the cashier, customers flow to the waiters
+ * From the cashier, orders flow to the waiters
  */
 public class Waiter implements Runnable {
     private final Logger logger = LoggerFactory.getLogger(Waiter.class);
@@ -36,7 +36,7 @@ public class Waiter implements Runnable {
                         }
                     }
 
-                    order = restaurant.getOrders().poll();
+                    order = restaurant.removeFromQueue();
                     logger.debug("Polled from queue. orders = {}, order = {}", restaurant.getOrders(), order);
                 }
 
@@ -51,7 +51,7 @@ public class Waiter implements Runnable {
     
 
     private void serve(Order order) throws InterruptedException {
-        logger.debug("Request to serve order : {}", order);
+        logger.debug("Starting to serve order : {}", order);
 
         // assume we wait for 1 - 5seconds, and then come with a response
         int timeWait = (rand.nextInt(5 - 1) + 1) * 1000;
